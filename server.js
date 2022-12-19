@@ -21,7 +21,7 @@ const sess = {
     })
   };
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,13 +37,8 @@ app.use(session(sess));
 app.use(routes);
 
 
-sequelize.sync({ force: false }).then(() => {
-    app.listen(process.env.PORT ||3001, () => console.log('Now listening'));
-  });
-
-  // if (process.env.NODE_ENV === 'production') {
-  //   app.use(express.static('client/build'));
-  // }
-  // app.get('*', (request, response) => {
-  //   response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  // });
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}!`);
+  sequelize.sync({ force: false });
+});
+  
